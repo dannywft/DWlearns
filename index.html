@@ -3,887 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-900: Microsoft Azure AI Fundamentals — Mock Exam</title>
+<title>DW Learns</title>
 <style>
-:root {
-  --blue:#0078D4; --dblue:#005A9E; --lblue:#E3F2FD;
-  --green:#107C10; --red:#D13438; --orange:#FF8C00;
-  --gray:#F3F3F3; --dgray:#605E5C; --border:#EDEBE9;
-  --white:#FFFFFF; --text:#323130;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#EEF2F7;color:var(--text);min-height:100vh}
+  :root {
+    --blue: #0078D4;
+    --dblue: #005A9E;
+    --lblue: #E3F2FD;
+    --text: #323130;
+    --dgray: #605E5C;
+    --border: #EDEBE9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #EEF2F7;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-/* ── HEADER ─────────────────────────────────────────────── */
-.hdr{background:linear-gradient(135deg,#0078D4,#003F87);color:#fff;padding:14px 28px;
-     display:flex;justify-content:space-between;align-items:center;
-     box-shadow:0 3px 12px rgba(0,0,0,.25);position:sticky;top:0;z-index:200}
-.hdr-left .htitle{font-size:20px;font-weight:700;letter-spacing:-.2px}
-.hdr-left .hsub{font-size:12px;opacity:.8;margin-top:2px}
-.timer-box{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
-           border-radius:10px;padding:10px 20px;text-align:center;min-width:130px}
-.timer-lbl{font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.5px}
-.timer-val{font-size:28px;font-weight:800;letter-spacing:3px;font-variant-numeric:tabular-nums}
-.timer-val.warn{color:#FFD700}
-.timer-val.danger{color:#FF4444;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0078D4, #003F87);
+    color: #fff;
+    padding: 28px 36px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .25);
+  }
+  header h1 { font-size: 28px; font-weight: 700; letter-spacing: -.3px; }
+  header p  { font-size: 14px; opacity: .8; margin-top: 6px; }
 
-/* ── LAYOUT ─────────────────────────────────────────────── */
-.body-wrap{display:flex;max-width:1340px;margin:0 auto;padding:22px 18px;gap:20px}
-.sidebar{width:255px;flex-shrink:0;display:flex;flex-direction:column;gap:14px}
-.main{flex:1;min-width:0}
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+  main h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dgray);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 20px;
+  }
 
-/* ── CARDS ──────────────────────────────────────────────── */
-.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-.card-title{font-size:11px;font-weight:700;color:var(--dgray);text-transform:uppercase;
-            letter-spacing:.6px;margin-bottom:14px}
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
 
-/* ── PROGRESS ───────────────────────────────────────────── */
-.prog-text{font-size:13px;color:var(--dgray);margin-bottom:6px}
-.prog-wrap{background:#E0E0E0;border-radius:5px;height:8px;overflow:hidden}
-.prog-fill{background:var(--blue);height:8px;border-radius:5px;transition:width .3s}
-.flag-text{font-size:12px;color:var(--dgray);margin-top:8px}
+  /* ── CARD ── */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .07);
+    text-decoration: none;
+    color: var(--text);
+    border: 2px solid transparent;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 6px 20px rgba(0, 120, 212, .18);
+    transform: translateY(-2px);
+  }
+  .card-icon {
+    font-size: 36px;
+    line-height: 1;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--dgray);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--lblue);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin-top: auto;
+    width: fit-content;
+  }
 
-/* ── Q GRID ─────────────────────────────────────────────── */
-.qgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.qbtn{aspect-ratio:1;border:2px solid #DDD;border-radius:7px;background:#fff;
-      font-size:11px;font-weight:700;cursor:pointer;transition:all .12s;
-      display:flex;align-items:center;justify-content:center;color:var(--text)}
-.qbtn:hover{border-color:var(--blue);color:var(--blue)}
-.qbtn.cur{border-color:var(--blue);background:var(--blue);color:#fff}
-.qbtn.ans{border-color:var(--green);background:#EAFAEA;color:var(--green)}
-.qbtn.flg{border-color:var(--orange);background:#FFF5E6;color:var(--orange)}
-
-/* ── LEGEND ─────────────────────────────────────────────── */
-.legend{display:flex;flex-direction:column;gap:7px}
-.leg-row{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--dgray)}
-.leg-dot{width:14px;height:14px;border-radius:4px;border:2px solid;flex-shrink:0}
-
-/* ── QUESTION CARD ──────────────────────────────────────── */
-.q-card{background:#fff;border-radius:14px;padding:34px 36px;
-        box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:14px}
-.q-meta{display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap}
-.q-num{font-size:12px;font-weight:700;color:var(--blue);background:var(--lblue);
-       padding:4px 14px;border-radius:20px}
-.q-dom{font-size:12px;color:var(--dgray);background:var(--gray);padding:4px 14px;border-radius:20px}
-.q-flg-btn{margin-left:auto;background:none;border:1px solid #DDD;border-radius:7px;
-           padding:5px 14px;font-size:12px;cursor:pointer;color:var(--dgray);
-           transition:all .12s;font-family:inherit}
-.q-flg-btn:hover,.q-flg-btn.on{border-color:var(--orange);color:var(--orange);background:#FFF5E6}
-.q-text{font-size:17px;line-height:1.65;margin-bottom:28px}
-.opts{display:flex;flex-direction:column;gap:11px}
-.opt{display:flex;align-items:flex-start;gap:14px;padding:15px 20px;border:2px solid #E8E8E8;
-     border-radius:10px;cursor:pointer;transition:all .13s;background:#fff}
-.opt:hover:not(.dis){border-color:var(--blue);background:var(--lblue)}
-.opt.sel{border-color:var(--blue);background:#EBF4FD}
-.opt.ok{border-color:var(--green);background:#EAFAEA}
-.opt.ng{border-color:var(--red);background:#FDEAEA}
-.opt.dis{cursor:default}
-.opt-letter{width:30px;height:30px;border-radius:50%;border:2px solid #CCC;
-            display:flex;align-items:center;justify-content:center;
-            font-size:13px;font-weight:700;flex-shrink:0;transition:all .13s}
-.sel .opt-letter{border-color:var(--blue);background:var(--blue);color:#fff}
-.ok  .opt-letter{border-color:var(--green);background:var(--green);color:#fff}
-.ng  .opt-letter{border-color:var(--red);background:var(--red);color:#fff}
-.opt-text{font-size:15px;line-height:1.5;padding-top:2px}
-
-/* ── EXPLANATION ────────────────────────────────────────── */
-.exp-box{margin-top:20px;padding:16px 20px;border-radius:10px;border-left:4px solid;display:none}
-.exp-box.ok-exp{background:#EAFAEA;border-color:var(--green)}
-.exp-box.ng-exp{background:#FDEAEA;border-color:var(--red)}
-.exp-hdr{font-weight:700;font-size:13px;margin-bottom:6px}
-.exp-hdr.ok-hdr{color:var(--green)} .exp-hdr.ng-hdr{color:var(--red)}
-.exp-txt{font-size:13px;line-height:1.65;color:var(--text)}
-
-/* ── NAV BAR ─────────────────────────────────────────────── */
-.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
-.btn{padding:10px 26px;border-radius:9px;border:none;font-size:14px;font-weight:700;
-     cursor:pointer;transition:all .12s;font-family:inherit}
-.btn-pri{background:var(--blue);color:#fff}
-.btn-pri:hover{background:var(--dblue)}
-.btn-sec{background:#fff;color:var(--blue);border:2px solid var(--blue)}
-.btn-sec:hover{background:var(--lblue)}
-.btn-red{background:var(--red);color:#fff}
-.btn-red:hover{background:#B02020}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-
-/* ── START SCREEN ───────────────────────────────────────── */
-#start-screen{max-width:740px;margin:40px auto;background:#fff;border-radius:18px;
-              padding:52px 48px;box-shadow:0 6px 30px rgba(0,0,0,.1);text-align:center}
-.start-icon{width:84px;height:84px;background:linear-gradient(135deg,#0078D4,#003F87);
-            border-radius:22px;display:flex;align-items:center;justify-content:center;
-            margin:0 auto 24px;font-size:40px}
-.start-title{font-size:30px;font-weight:800;margin-bottom:6px}
-.start-sub{font-size:16px;color:var(--dgray);margin-bottom:38px}
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:34px}
-.info-item{padding:18px;background:var(--gray);border-radius:12px}
-.info-val{font-size:26px;font-weight:800;color:var(--blue);display:block}
-.info-lbl{font-size:13px;color:var(--dgray);margin-top:4px}
-.dom-list{text-align:left;background:var(--gray);border-radius:12px;padding:20px;margin-bottom:34px}
-.dom-list h4{font-size:12px;font-weight:700;color:var(--dgray);text-transform:uppercase;
-             letter-spacing:.6px;margin-bottom:14px}
-.dom-row{display:flex;justify-content:space-between;padding:8px 0;
-         border-bottom:1px solid var(--border);font-size:14px}
-.dom-row:last-child{border-bottom:none}
-.dom-pct{font-weight:700;color:var(--blue)}
-.tip-box{background:#F0F7FF;border:1px solid #C2DCF7;border-radius:10px;
-         padding:16px 20px;text-align:left;margin-bottom:28px}
-.tip-box h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}
-.tip-box ul{font-size:13px;color:var(--dgray);line-height:1.9;list-style:disc;padding-left:18px}
-
-/* ── RESULTS ─────────────────────────────────────────────── */
-#results-screen{display:none;padding:20px;max-width:820px;margin:0 auto}
-.res-card{background:#fff;border-radius:16px;padding:40px;box-shadow:0 4px 20px rgba(0,0,0,.09);margin-bottom:18px}
-.score-wrap{display:flex;justify-content:center;margin-bottom:26px}
-.score-ring{width:150px;height:150px;border-radius:50%;display:flex;flex-direction:column;
-            align-items:center;justify-content:center;border:10px solid}
-.score-ring.pass{border-color:var(--green);background:#EAFAEA}
-.score-ring.fail{border-color:var(--red);background:#FDEAEA}
-.score-pct{font-size:38px;font-weight:800}
-.score-ring.pass .score-pct{color:var(--green)}
-.score-ring.fail .score-pct{color:var(--red)}
-.score-sub{font-size:12px;color:var(--dgray)}
-.res-title{text-align:center;font-size:26px;font-weight:800;margin-bottom:6px}
-.res-sub{text-align:center;color:var(--dgray);font-size:15px;margin-bottom:28px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
-.stat-box{text-align:center;padding:16px;background:var(--gray);border-radius:10px}
-.stat-val{font-size:26px;font-weight:800}
-.stat-lbl{font-size:12px;color:var(--dgray);margin-top:4px}
-.dom-perf{margin-bottom:14px}
-.dp-hdr{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
-.dp-bar-w{background:#E0E0E0;border-radius:5px;height:10px;overflow:hidden}
-.dp-bar{height:10px;border-radius:5px;transition:width 1s ease}
-
-/* ── REVIEW ──────────────────────────────────────────────── */
-.rev-card{background:#fff;border-radius:12px;padding:26px 30px;
-          box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:14px}
-.rev-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 14px;
-           border-radius:20px;font-size:12px;font-weight:700;margin-bottom:14px}
-.rev-badge.ok{background:#EAFAEA;color:var(--green)}
-.rev-badge.ng{background:#FDEAEA;color:var(--red)}
-.rev-badge.sk{background:var(--gray);color:var(--dgray)}
-
-/* ── TOAST ───────────────────────────────────────────────── */
-.toast{position:fixed;bottom:26px;right:26px;background:#1F1F1F;color:#fff;
-       padding:12px 22px;border-radius:9px;font-size:14px;
-       opacity:0;transition:opacity .3s;z-index:9999;pointer-events:none}
-.toast.on{opacity:1}
-
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media(max-width:900px){.body-wrap{flex-direction:column}.sidebar{width:100%}}
-@media(max-width:580px){
-  .q-card{padding:20px 18px}.start-screen{padding:30px 20px}
-  .info-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}
-  .timer-val{font-size:22px}
-}
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--dgray);
+  }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════ HEADER ═══════════════════ -->
-<header class="hdr">
-  <div class="hdr-left">
-    <div class="htitle">AI-900: Microsoft Azure AI Fundamentals</div>
-    <div class="hsub">Official Practice Mock Exam — 50 Questions</div>
-  </div>
-  <div class="timer-box" id="timer-box" style="display:none">
-    <div class="timer-lbl">Time Remaining</div>
-    <div class="timer-val" id="tmr">45:00</div>
-  </div>
+<header>
+  <h1>DW Learns 📚</h1>
+  <p>A collection of learning resources and mock exams</p>
 </header>
 
-<!-- ═══════════════════ START SCREEN ═══════════════════ -->
-<div id="start-screen">
-  <div class="start-icon">🧠</div>
-  <h1 class="start-title">AI-900 Mock Exam</h1>
-  <p class="start-sub">Microsoft Azure AI Fundamentals — Full 50-Question Practice Test</p>
+<main>
+  <h2>Learning Resources</h2>
+  <div class="grid">
 
-  <div class="info-grid">
-    <div class="info-item"><span class="info-val">50</span><div class="info-lbl">Questions</div></div>
-    <div class="info-item"><span class="info-val">45 min</span><div class="info-lbl">Time Limit</div></div>
-    <div class="info-item"><span class="info-val">700/1000</span><div class="info-lbl">Passing Score</div></div>
-  </div>
+    <a class="card" href="ai900.html">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">AI-900 Mock Exam</div>
+      <div class="card-desc">Microsoft Azure AI Fundamentals — practice questions with instant feedback and a timed exam mode.</div>
+      <span class="card-tag">Mock Exam</span>
+    </a>
 
-  <div class="dom-list">
-    <h4>Exam Skill Domains</h4>
-    <div class="dom-row"><span>AI Workloads &amp; Considerations</span><span class="dom-pct">15–20%</span></div>
-    <div class="dom-row"><span>Machine Learning on Azure</span><span class="dom-pct">20–25%</span></div>
-    <div class="dom-row"><span>Computer Vision on Azure</span><span class="dom-pct">15–20%</span></div>
-    <div class="dom-row"><span>Natural Language Processing on Azure</span><span class="dom-pct">15–20%</span></div>
-    <div class="dom-row"><span>Generative AI on Azure</span><span class="dom-pct">15–20%</span></div>
-  </div>
-
-  <div class="tip-box">
-    <h4>⌨️ Keyboard Shortcuts</h4>
-    <ul>
-      <li><strong>← / →</strong> — Navigate between questions</li>
-      <li><strong>1 / 2 / 3 / 4</strong> — Select answer A / B / C / D</li>
-      <li><strong>F</strong> — Flag / unflag question for review</li>
-    </ul>
-  </div>
-
-  <button class="btn btn-pri" onclick="startExam()" style="font-size:16px;padding:15px 48px">
-    Start Mock Exam →
-  </button>
-</div>
-
-<!-- ═══════════════════ EXAM SCREEN ═══════════════════ -->
-<div id="exam-screen" style="display:none">
-  <div class="body-wrap">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="card">
-        <div class="card-title">Progress</div>
-        <div class="prog-text" id="prog-txt">0 / 50 answered</div>
-        <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
-        <div class="flag-text" id="flag-txt">0 flagged for review</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Question Map</div>
-        <div class="qgrid" id="qgrid"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Legend</div>
-        <div class="legend">
-          <div class="leg-row"><div class="leg-dot" style="border-color:#0078D4;background:#0078D4"></div>Current</div>
-          <div class="leg-row"><div class="leg-dot" style="border-color:#107C10;background:#EAFAEA"></div>Answered</div>
-          <div class="leg-row"><div class="leg-dot" style="border-color:#FF8C00;background:#FFF5E6"></div>Flagged</div>
-          <div class="leg-row"><div class="leg-dot" style="border-color:#DDD;background:#fff"></div>Unanswered</div>
-        </div>
-      </div>
-
-      <button class="btn btn-red" style="width:100%;border-radius:9px" onclick="confirmSubmit()">
-        Submit Exam
-      </button>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <div class="q-card" id="q-card"></div>
-      <div class="nav-bar">
-        <button class="btn btn-sec" id="prev-btn" onclick="nav(-1)">← Previous</button>
-        <span style="font-size:13px;color:var(--dgray)" id="nav-info"></span>
-        <button class="btn btn-pri" id="next-btn" onclick="nav(1)">Next →</button>
-      </div>
-    </main>
-  </div>
-</div>
-
-<!-- ═══════════════════ RESULTS SCREEN ═══════════════════ -->
-<div id="results-screen">
-  <div style="max-width:820px;margin:0 auto;padding:20px">
-    <div class="res-card" id="res-card"></div>
-    <div style="text-align:center;margin-bottom:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <button class="btn btn-pri" onclick="showReview()">Review All Answers</button>
-      <button class="btn btn-sec" onclick="restartExam()">Retake Exam</button>
+    <!-- Placeholder cards for future learning sites -->
+    <div class="card" style="opacity:.45;cursor:default;">
+      <div class="card-icon">☁️</div>
+      <div class="card-title">AZ-900 Mock Exam</div>
+      <div class="card-desc">Microsoft Azure Fundamentals — coming soon.</div>
+      <span class="card-tag">Coming Soon</span>
     </div>
-    <div id="rev-section" style="display:none"></div>
+
+    <div class="card" style="opacity:.45;cursor:default;">
+      <div class="card-icon">🔐</div>
+      <div class="card-title">SC-900 Mock Exam</div>
+      <div class="card-desc">Microsoft Security, Compliance &amp; Identity — coming soon.</div>
+      <span class="card-tag">Coming Soon</span>
+    </div>
+
   </div>
-</div>
+</main>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
+<footer>
+  &copy; 2026 DW Learns
+</footer>
 
-<script>
-// ═══════════════════════════════════════════════════════════════════
-// QUESTIONS
-// ═══════════════════════════════════════════════════════════════════
-const Q = [
-// ── DOMAIN 1: AI Workloads & Considerations (10 Qs) ─────────────
-{id:1,dom:"AI Workloads",
- txt:"A company wants to build a system that automatically tags photos of products on their e-commerce website. Which type of AI workload does this represent?",
- opts:["Natural language processing","Computer vision","Anomaly detection","Forecasting"],
- ans:1,
- exp:"Computer vision workloads involve analysing and interpreting visual content such as images and videos. Automatically tagging product photos is image classification — a core computer vision task."},
-
-{id:2,dom:"AI Workloads",
- txt:"Which Microsoft Responsible AI principle states that AI systems should be understandable, and that people should be able to understand how AI arrives at its decisions?",
- opts:["Fairness","Reliability and safety","Transparency","Accountability"],
- ans:2,
- exp:"Transparency means making AI systems understandable — ensuring people can comprehend how the AI works and how it reaches its outputs. Accountability refers to human responsibility for AI decisions, which is a related but distinct principle."},
-
-{id:3,dom:"AI Workloads",
- txt:"A hospital uses an AI model to predict patient readmission risk. The model consistently predicts higher risk for patients from a specific demographic group even when clinical data is comparable. Which Responsible AI principle is being violated?",
- opts:["Privacy and security","Inclusiveness","Fairness","Reliability and safety"],
- ans:2,
- exp:"Fairness requires that AI systems treat all people equitably and do not disadvantage individuals based on demographic characteristics. Systematic biased predictions for a demographic group is a clear fairness violation."},
-
-{id:4,dom:"AI Workloads",
- txt:"Which type of machine learning task would you use to predict the selling price of a house based on features such as number of bedrooms, location, and square footage?",
- opts:["Classification","Clustering","Regression","Reinforcement learning"],
- ans:2,
- exp:"Regression predicts a continuous numerical output such as price. Classification is for categorical outputs (e.g. yes/no), and clustering groups unlabelled data. Predicting house price is a regression task."},
-
-{id:5,dom:"AI Workloads",
- txt:"An AI system is deployed to automatically approve or reject loan applications. According to Responsible AI principles, what practice is most essential for this scenario?",
- opts:["Ensuring the model is trained on the largest possible dataset","Maintaining human oversight and the ability to appeal decisions","Using the most complex neural network available","Keeping the model weights proprietary"],
- ans:1,
- exp:"Accountability and Inclusiveness principles require that consequential AI decisions — especially those affecting people's livelihoods — include human oversight and mechanisms to appeal or correct decisions. Fully automated high-stakes decisions should never be final without a human review path."},
-
-{id:6,dom:"AI Workloads",
- txt:"Which of the following is an example of a conversational AI workload?",
- opts:["A system that detects fraudulent transactions in real time","A chatbot that answers customer questions about product returns","A model that predicts equipment failure before it happens","A service that converts product images to searchable tags"],
- ans:1,
- exp:"Conversational AI workloads involve natural language dialogue between humans and AI — typically through chat interfaces, voice assistants, or bots. A customer service chatbot is the textbook example."},
-
-{id:7,dom:"AI Workloads",
- txt:"What is the primary goal of anomaly detection as an AI workload?",
- opts:["Grouping similar data points into clusters","Predicting future values based on historical trends","Identifying data points that deviate significantly from expected patterns","Labelling data into predefined categories"],
- ans:2,
- exp:"Anomaly detection identifies unusual patterns or outliers that do not conform to expected behaviour. Common use cases include fraud detection, network intrusion detection, and predictive maintenance."},
-
-{id:8,dom:"AI Workloads",
- txt:"A retail company uses AI to analyse historical sales data and predict demand for next quarter. Which AI workload category does this fall under?",
- opts:["Computer vision","Natural language processing","Anomaly detection","Forecasting"],
- ans:3,
- exp:"Forecasting uses historical time-series data to predict future values. Predicting next-quarter demand from historical sales is a forecasting workload."},
-
-{id:9,dom:"AI Workloads",
- txt:"Which Microsoft Responsible AI principle focuses on protecting individuals' personal data and ensuring AI systems comply with data protection regulations?",
- opts:["Fairness","Privacy and security","Transparency","Reliability and safety"],
- ans:1,
- exp:"The Privacy and Security principle requires AI systems to be designed to protect personal data, respect privacy rights, and implement controls that prevent unauthorised access or misuse of personal information."},
-
-{id:10,dom:"AI Workloads",
- txt:"In the context of AI, what does 'reinforcement learning' involve?",
- opts:["Training a model on labelled examples where correct answers are provided","Training a model to find hidden patterns in unlabelled data","Training an agent to maximise a reward signal through trial and error in an environment","Combining outputs of multiple models to improve prediction accuracy"],
- ans:2,
- exp:"Reinforcement learning (RL) trains an agent to make decisions by performing actions in an environment and receiving rewards or penalties. The agent learns through trial and error to maximise cumulative reward — unlike supervised learning, which requires labelled training data."},
-
-// ── DOMAIN 2: Machine Learning on Azure (13 Qs) ─────────────────
-{id:11,dom:"Machine Learning",
- txt:"Which Azure service provides a cloud-based environment for training, deploying, and managing machine learning models, with capabilities including Automated ML and a visual designer?",
- opts:["Azure Databricks","Azure Machine Learning","Azure Synapse Analytics","Azure Data Factory"],
- ans:1,
- exp:"Azure Machine Learning is the primary Azure service for the full ML lifecycle — data preparation, model training, deployment, and monitoring. It includes AutoML, a drag-and-drop Designer, managed compute clusters, and MLflow integration."},
-
-{id:12,dom:"Machine Learning",
- txt:"What does Azure Automated Machine Learning (AutoML) do?",
- opts:["Automatically deploys models to production without human review","Automatically selects the best algorithm and hyperparameters for a given dataset and task","Automatically labels training data using AI","Automatically scales compute resources during model training"],
- ans:1,
- exp:"AutoML automates algorithm selection, feature engineering, and hyperparameter tuning. It trains multiple candidate models in parallel and surfaces the best-performing one — dramatically reducing the expertise and time needed for model development."},
-
-{id:13,dom:"Machine Learning",
- txt:"In Azure Machine Learning, what is a 'pipeline'?",
- opts:["A secure network connection between Azure services","A reusable workflow of machine learning steps such as data preparation and model training","A deployment endpoint for serving model predictions","A version control system for machine learning experiments"],
- ans:1,
- exp:"An Azure ML pipeline is a reusable, automatable sequence of steps that define an ML workflow — typically data ingestion, preprocessing, training, evaluation, and registration. Pipelines support reproducibility, scheduling, and collaboration."},
-
-{id:14,dom:"Machine Learning",
- txt:"Which of the following statements best describes supervised learning?",
- opts:["The algorithm learns from unlabelled data to discover hidden patterns","The algorithm learns from labelled training data where each example includes the correct output","The algorithm learns by interacting with an environment and receiving rewards","The algorithm combines outputs from multiple models"],
- ans:1,
- exp:"Supervised learning uses labelled training data — each input is paired with the correct output. The model learns to map inputs to outputs. Classification and regression are both supervised learning tasks."},
-
-{id:15,dom:"Machine Learning",
- txt:"A data scientist notices that their model performs very well on training data but poorly on new, unseen test data. What problem is this?",
- opts:["Underfitting","Data drift","Overfitting","Class imbalance"],
- ans:2,
- exp:"Overfitting occurs when a model memorises the training data — including noise and outliers — and fails to generalise. The model has learned patterns specific to training examples rather than the underlying relationships."},
-
-{id:16,dom:"Machine Learning",
- txt:"In Azure Machine Learning, what is the purpose of model registration?",
- opts:["To encrypt the model for security compliance","To version, track, and manage trained models in a central repository","To automatically retrain the model on new data","To publish the model as a public API"],
- ans:1,
- exp:"Model registration stores trained models in a registry with versioning, metadata, and lineage tracking. This lets teams track which model version is in production, roll back to previous versions, and manage the full model lifecycle."},
-
-{id:17,dom:"Machine Learning",
- txt:"Which metric is most appropriate for evaluating a binary classification model on a balanced dataset?",
- opts:["Mean Absolute Error (MAE)","R-squared (R²)","Accuracy","Root Mean Squared Error (RMSE)"],
- ans:2,
- exp:"Accuracy — proportion of correctly classified instances — is appropriate for binary classification on balanced datasets. MAE, RMSE, and R² are regression metrics. For imbalanced classification, precision, recall, or F1-score would be more informative."},
-
-{id:18,dom:"Machine Learning",
- txt:"What is feature engineering in machine learning?",
- opts:["Building hardware accelerators for faster model training","The process of creating, selecting, or transforming input variables to improve model performance","Deploying a model as a REST API endpoint","Monitoring model performance after deployment"],
- ans:1,
- exp:"Feature engineering applies domain knowledge to create, select, or transform raw data into informative features that help algorithms learn better. Well-engineered features can dramatically improve model accuracy independently of algorithm choice."},
-
-{id:19,dom:"Machine Learning",
- txt:"In Azure Machine Learning Designer, what type of interface is used to build machine learning workflows?",
- opts:["Command-line interface (CLI) with YAML scripts","Jupyter Notebooks with Python code","Drag-and-drop visual canvas","SQL query editor"],
- ans:2,
- exp:"Azure ML Designer provides a drag-and-drop canvas where users assemble ML pipelines by connecting pre-built modules — no coding required. It's designed for users who prefer a graphical interface."},
-
-{id:20,dom:"Machine Learning",
- txt:"What is 'data drift' in the context of deployed machine learning models?",
- opts:["A bug that causes training data to be duplicated during preprocessing","Changes in the statistical distribution of input data over time, which can degrade model performance","Slow performance of data transfer between Azure regions","When a model is retrained with incorrect labels"],
- ans:1,
- exp:"Data drift occurs when the statistical properties of production data change over time compared to training data. This degrades model performance because the model was optimised for a different data distribution — making monitoring and retraining essential."},
-
-{id:21,dom:"Machine Learning",
- txt:"Which Azure Machine Learning concept allows you to define the hardware resources (CPU cores, memory, GPU) used for training?",
- opts:["Datastore","Compute target","Environment","Endpoint"],
- ans:1,
- exp:"A compute target specifies the computational resources where training or inference runs — including Azure ML compute clusters, Kubernetes clusters, local machines, and more — each configurable for CPU, memory, and GPU."},
-
-{id:22,dom:"Machine Learning",
- txt:"Which type of machine learning task groups customers into segments based on purchasing behaviour, without using predefined labels?",
- opts:["Classification","Regression","Clustering","Forecasting"],
- ans:2,
- exp:"Clustering is an unsupervised learning task that groups data points by similarity without labelled training data. Customer segmentation based on purchasing patterns is the classic clustering use case."},
-
-{id:23,dom:"Machine Learning",
- txt:"In Azure ML, what is the primary purpose of an 'experiment'?",
- opts:["A container for storing datasets used for training","A collection of training runs used to track, compare, and organise model development","A deployment slot for staging models before production","A security boundary for isolating ML workloads"],
- ans:1,
- exp:"An Azure ML experiment is a logical grouping of training runs, enabling data scientists to organise iterations, track metrics, compare outcomes, and review outputs — supporting reproducibility and team collaboration."},
-
-// ── DOMAIN 3: Computer Vision (10 Qs) ────────────────────────────
-{id:24,dom:"Computer Vision",
- txt:"Which Azure AI service provides pre-built capabilities for image analysis, including object detection, OCR, and image description generation?",
- opts:["Azure AI Language","Azure AI Vision","Azure AI Speech","Azure AI Search"],
- ans:1,
- exp:"Azure AI Vision (part of Azure AI Services) provides image analysis, object detection, OCR (Read API), spatial analysis, and image captioning out of the box — without requiring custom model training."},
-
-{id:25,dom:"Computer Vision",
- txt:"A retailer wants to count customers and measure dwell time in store aisles using ceiling-mounted cameras. Which Azure AI Vision capability is most relevant?",
- opts:["Image classification","Optical character recognition","Spatial analysis","Face detection"],
- ans:2,
- exp:"Azure AI Vision's Spatial Analysis enables real-time video stream analysis to detect, count, and track people's presence, movement, and dwell time in physical spaces — purpose-built for retail analytics scenarios."},
-
-{id:26,dom:"Computer Vision",
- txt:"What is the difference between object detection and image classification in computer vision?",
- opts:["Image classification identifies multiple objects; object detection assigns a single label to the whole image","Object detection locates and labels multiple objects with bounding boxes; image classification assigns a single label to the whole image","Object detection works only on video; image classification works only on still images","There is no practical difference — they are synonymous"],
- ans:1,
- exp:"Image classification assigns one label to an entire image (e.g. 'cat'). Object detection identifies and locates multiple objects within an image using bounding boxes, labelling each one (e.g. 'cat at [x1,y1,x2,y2]')."},
-
-{id:27,dom:"Computer Vision",
- txt:"Which Azure service allows you to train a custom image classification model with your own labelled images, without writing ML code?",
- opts:["Azure AI Vision — Analyze Image API","Azure Custom Vision","Azure Machine Learning Designer","Azure Cognitive Search"],
- ans:1,
- exp:"Azure Custom Vision is a no-code service for training custom image classification and object detection models. You upload labelled images, train, evaluate, and publish the model — all via a visual portal or SDK."},
-
-{id:28,dom:"Computer Vision",
- txt:"What does Optical Character Recognition (OCR) do in Azure AI Vision?",
- opts:["Converts spoken words into written text","Detects and reads printed or handwritten text from images and documents","Translates text between languages in real time","Classifies documents into predefined categories"],
- ans:1,
- exp:"OCR extracts text from images, scanned documents, and photographs — handling both printed and handwritten text. The Azure AI Vision Read API performs high-accuracy OCR and returns text with position coordinates."},
-
-{id:29,dom:"Computer Vision",
- txt:"Which Azure AI service includes capabilities for detecting human faces, analysing facial attributes, and verifying identity?",
- opts:["Azure AI Vision","Azure AI Face","Azure AI Document Intelligence","Azure AI Speech"],
- ans:1,
- exp:"Azure AI Face is a dedicated service for face detection, attribute analysis (age, emotion, accessories), face comparison, and face verification. It operates separately from the general Azure AI Vision service."},
-
-{id:30,dom:"Computer Vision",
- txt:"A logistics company wants to automatically extract structured data from scanned invoices — vendor names, invoice numbers, and line items. Which Azure service is best suited for this?",
- opts:["Azure AI Vision — OCR API","Azure AI Document Intelligence","Azure AI Language — Text Analytics","Azure Custom Vision"],
- ans:1,
- exp:"Azure AI Document Intelligence (formerly Form Recognizer) extracts structured data from business documents such as invoices, receipts, and contracts. Unlike basic OCR, it understands document structure and returns key-value pairs and tables."},
-
-{id:31,dom:"Computer Vision",
- txt:"What is the minimum recommended number of images per tag/class to train an effective Custom Vision model?",
- opts:["1–2 images","At least 15 images","At least 1,000 images","Exactly 100 images"],
- ans:1,
- exp:"Microsoft recommends at least 15–30 images per tag in Custom Vision to train a reasonably effective model. Custom Vision leverages transfer learning to work with relatively small datasets, though more data generally improves accuracy."},
-
-{id:32,dom:"Computer Vision",
- txt:"What is 'semantic segmentation' in computer vision?",
- opts:["Converting image text into semantic meaning","Classifying each individual pixel of an image into a category","Grouping similar images into clusters","Detecting faces and identifying emotional states"],
- ans:1,
- exp:"Semantic segmentation classifies every pixel in an image into a category (e.g. 'sky', 'road', 'car', 'person'). This provides pixel-level scene understanding, used in autonomous driving, medical imaging, and satellite imagery analysis."},
-
-{id:33,dom:"Computer Vision",
- txt:"Which Azure AI Vision feature generates a natural language description of an image's content?",
- opts:["Smart cropping","Image tagging","Image captioning / Image description","Background removal"],
- ans:2,
- exp:"Azure AI Vision's image captioning generates a human-readable sentence describing what is depicted in an image — for example, 'A woman sitting at a desk using a laptop computer.' It uses vision-language models and supports accessibility scenarios."},
-
-// ── DOMAIN 4: NLP on Azure (10 Qs) ───────────────────────────────
-{id:34,dom:"NLP",
- txt:"Which Azure AI service provides NLP capabilities including sentiment analysis, key phrase extraction, named entity recognition, and language detection?",
- opts:["Azure AI Speech","Azure AI Translator","Azure AI Language","Azure Bot Service"],
- ans:2,
- exp:"Azure AI Language (part of Azure AI Services) provides a suite of NLP features including sentiment analysis, opinion mining, key phrase extraction, named entity recognition (NER), language detection, and Conversational Language Understanding."},
-
-{id:35,dom:"NLP",
- txt:"A customer review states: 'The product quality is excellent but the delivery was extremely slow.' What would a modern sentiment analysis return for this review?",
- opts:["Positive overall, with mixed aspect-level sentiment","Negative overall","Neutral sentiment","Positive only"],
- ans:0,
- exp:"Azure AI Language's opinion mining performs aspect-level sentiment analysis. This review would return positive sentiment for the product quality aspect and negative sentiment for the delivery aspect — an overall mixed result."},
-
-{id:36,dom:"NLP",
- txt:"What is the primary function of Azure AI Translator?",
- opts:["Converting spoken audio into written text","Translating text between more than 100 supported languages","Classifying text documents into categories","Extracting named entities from text"],
- ans:1,
- exp:"Azure AI Translator is a cloud-based neural machine translation service supporting real-time text translation across 100+ languages and dialects. It also supports transliteration, language detection, and custom translation via Custom Translator."},
-
-{id:37,dom:"NLP",
- txt:"Which Azure service would you use to add speech-to-text transcription and text-to-speech synthesis capabilities to an application?",
- opts:["Azure AI Language","Azure AI Speech","Azure AI Translator","Azure AI Vision"],
- ans:1,
- exp:"Azure AI Speech provides speech-to-text (real-time and batch transcription), text-to-speech (neural voices), speech translation, and speaker recognition. It supports a wide range of languages and custom voice and language models."},
-
-{id:38,dom:"NLP",
- txt:"What is Named Entity Recognition (NER) in NLP?",
- opts:["Assigning sentiment scores to text","Identifying and classifying specific entities (people, places, organisations, dates) in text","Translating named entities between languages","Summarising long documents into key sentences"],
- ans:1,
- exp:"NER identifies and classifies mentions of real-world entities in text — person names, organisations, locations, dates, monetary values, and more. Example: 'Microsoft (ORG) was founded in Albuquerque (LOC) in 1975 (DATE).'"},
-
-{id:39,dom:"NLP",
- txt:"Which Azure AI Language capability enables building a bot that answers natural language questions from a knowledge base of documents and FAQs?",
- opts:["Question Answering","Azure AI Search","Azure AI Vision","Azure Logic Apps"],
- ans:0,
- exp:"Azure AI Language's Question Answering feature (formerly QnA Maker) lets you create a knowledge base from documents, URLs, and FAQs. Bots use it to find and return the best matching answer to natural language questions."},
-
-{id:40,dom:"NLP",
- txt:"Which Azure service would you use to build a model that understands user intent and extracts key information (entities) from natural language utterances?",
- opts:["Azure AI Language — Conversational Language Understanding (CLU)","Azure AI Document Intelligence","Azure AI Vision — Spatial Analysis","Azure AI Translator"],
- ans:0,
- exp:"CLU (Conversational Language Understanding), part of Azure AI Language, lets you train a model to recognise intents and extract entities from natural language. For example, a travel bot understands 'Book a flight to Tokyo next Friday' — intent: BookFlight, entities: Destination=Tokyo, Date=next Friday."},
-
-{id:41,dom:"NLP",
- txt:"What does 'key phrase extraction' do in Azure AI Language?",
- opts:["Translates the most important phrases to another language","Identifies and returns the main topics and key talking points from text","Encrypts sensitive phrases for data security","Generates a summary of the text"],
- ans:1,
- exp:"Key phrase extraction surfaces the most significant words and phrases representing the main topics discussed. From 'Great hotel with amazing sea views and friendly staff' it would extract: 'Great hotel', 'amazing sea views', 'friendly staff'."},
-
-{id:42,dom:"NLP",
- txt:"Azure Bot Service integrates natively with which channel to deploy a bot into Microsoft Teams?",
- opts:["Direct Line channel","Microsoft Teams channel","Web Chat channel","Email channel"],
- ans:1,
- exp:"Azure Bot Service's Microsoft Teams channel enables deploying bots directly into Teams, where users interact via Teams chat. Direct Line is for custom web/app integrations; Web Chat is for embedding bots on websites."},
-
-{id:43,dom:"NLP",
- txt:"What is the purpose of 'language detection' in Azure AI Language?",
- opts:["Detecting whether text contains offensive language","Identifying the language in which a piece of text is written","Checking text for grammatical errors","Detecting the topic category of text"],
- ans:1,
- exp:"Language detection identifies the language a text is written in, returning the detected language name, ISO 639-1 code, and a confidence score. It supports 100+ languages and is commonly used as a preprocessing step to route text to language-specific models."},
-
-// ── DOMAIN 5: Generative AI on Azure (7 Qs) ──────────────────────
-{id:44,dom:"Generative AI",
- txt:"What is Azure OpenAI Service?",
- opts:["An open-source AI framework for building custom neural networks","A Microsoft Azure service providing access to OpenAI's models (GPT-4, DALL-E, Whisper) with Azure enterprise security and compliance","A free tool for generating AI images for personal use","An Azure service that automatically trains large language models on customer data"],
- ans:1,
- exp:"Azure OpenAI Service provides access to OpenAI's powerful models — including GPT-4, GPT-4o, DALL-E, and Whisper — through Azure's infrastructure, with enterprise-grade security, compliance, private networking, and Responsible AI controls."},
-
-{id:45,dom:"Generative AI",
- txt:"What is a 'prompt' in the context of large language models (LLMs)?",
- opts:["A security token used to authenticate API requests","The input text or instructions provided to an LLM to generate a desired response","A scheduled trigger that initiates model training","A performance metric for evaluating model accuracy"],
- ans:1,
- exp:"A prompt is the input given to an LLM — it can be a question, instruction, context, example, or combination. The structure and quality of the prompt significantly affects response quality, which is the focus of 'prompt engineering'."},
-
-{id:46,dom:"Generative AI",
- txt:"What is Retrieval-Augmented Generation (RAG)?",
- opts:["A technique for generating synthetic training data to augment small datasets","A pattern that enhances LLM responses by retrieving relevant documents from an external knowledge base at query time","A method for reducing hallucinations by randomly sampling multiple responses","An Azure service that automatically updates LLM weights with new information"],
- ans:1,
- exp:"RAG combines retrieval of relevant content from a knowledge base (e.g. company documents indexed in Azure AI Search) with LLM generation. Retrieved context is included in the prompt, grounding the model's response in specific, up-to-date information and reducing hallucinations."},
-
-{id:47,dom:"Generative AI",
- txt:"What is a 'hallucination' in the context of large language models?",
- opts:["When the model runs out of context window and stops generating text","When the model generates confident-sounding but factually incorrect or fabricated information","When the model becomes slow due to hardware limitations","When the model repeats the same phrase multiple times"],
- ans:1,
- exp:"Hallucination refers to an LLM generating plausible-sounding but factually incorrect, misleading, or entirely fabricated content. This is a fundamental LLM challenge — and a core reason why grounding techniques like RAG and human oversight are essential in production."},
-
-{id:48,dom:"Generative AI",
- txt:"What is 'grounding' in the context of generative AI applications?",
- opts:["Fine-tuning an LLM on domain-specific data to improve general knowledge","Connecting an LLM to authoritative data sources to anchor its responses in verifiable facts","Converting text prompts into image generation parameters","Setting safety filters to block inappropriate content generation"],
- ans:1,
- exp:"Grounding connects an LLM to specific authoritative sources (documents, databases, APIs) so responses are anchored to verified information rather than solely training data. RAG is the primary grounding pattern — it reduces hallucinations and enables up-to-date, source-attributable answers."},
-
-{id:49,dom:"Generative AI",
- txt:"Which Azure service provides content filtering APIs to detect harmful content categories (hate, violence, sexual, self-harm) in both inputs and outputs of AI systems?",
- opts:["Azure Policy","Azure AI Content Safety","Azure Active Directory","Microsoft Purview"],
- ans:1,
- exp:"Azure AI Content Safety provides APIs for detecting harmful content across four categories: hate and fairness, violence, sexual, and self-harm. It integrates with Azure OpenAI Service to apply safety filters, supporting responsible AI deployment at scale."},
-
-{id:50,dom:"Generative AI",
- txt:"What are 'tokens' in the context of large language models?",
- opts:["API authentication keys used to access Azure OpenAI endpoints","The fundamental units of text that LLMs process — roughly corresponding to words or word fragments","Encrypted data packets used for secure model transmission","Performance benchmarks for measuring LLM inference speed"],
- ans:1,
- exp:"Tokens are the fundamental text units that LLMs process — roughly 3–4 characters or ~0.75 words in English. LLMs have a 'context window' measured in tokens (e.g. 128k tokens for GPT-4o). API pricing is based on input + output token counts."}
-];
-
-// ═══════════════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════════════
-let s = {
-  cur:0, ans:new Array(50).fill(null),
-  flg:new Array(50).fill(false),
-  t0:null, tEnd:null, timer:null,
-  left:45*60, done:false
-};
-
-// ═══════════════════════════════════════════════════════════════════
-// TIMER
-// ═══════════════════════════════════════════════════════════════════
-function startTimer(){
-  s.timer=setInterval(()=>{
-    s.left--;
-    renderTimer();
-    if(s.left<=0){clearInterval(s.timer);toast('⏰ Time is up! Submitting…');setTimeout(submit,1500)}
-  },1000);
-}
-function renderTimer(){
-  const m=Math.floor(s.left/60),sc=s.left%60;
-  const el=document.getElementById('tmr');
-  el.textContent=`${String(m).padStart(2,'0')}:${String(sc).padStart(2,'0')}`;
-  el.className='timer-val';
-  if(s.left<=300) el.classList.add('danger');
-  else if(s.left<=600) el.classList.add('warn');
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// START
-// ═══════════════════════════════════════════════════════════════════
-function startExam(){
-  document.getElementById('start-screen').style.display='none';
-  document.getElementById('exam-screen').style.display='block';
-  document.getElementById('timer-box').style.display='block';
-  s.t0=new Date();
-  buildGrid();
-  render();
-  startTimer();
-}
-
-function buildGrid(){
-  const g=document.getElementById('qgrid');
-  g.innerHTML='';
-  Q.forEach((_,i)=>{
-    const b=document.createElement('button');
-    b.className='qbtn';b.id='qb'+i;b.textContent=i+1;
-    b.onclick=()=>{s.cur=i;render()};
-    g.appendChild(b);
-  });
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// RENDER QUESTION
-// ═══════════════════════════════════════════════════════════════════
-function render(){
-  const q=Q[s.cur];
-  const L=['A','B','C','D'];
-
-  // Update grid buttons
-  document.querySelectorAll('.qbtn').forEach((b,i)=>{
-    b.className='qbtn';
-    if(i===s.cur) b.classList.add('cur');
-    else if(s.flg[i]) b.classList.add('flg');
-    else if(s.ans[i]!==null) b.classList.add('ans');
-  });
-
-  // Progress
-  const ac=s.ans.filter(a=>a!==null).length;
-  document.getElementById('prog-txt').textContent=`${ac} / 50 answered`;
-  document.getElementById('prog-fill').style.width=`${ac/50*100}%`;
-  document.getElementById('flag-txt').textContent=`${s.flg.filter(Boolean).length} flagged`;
-
-  // Options HTML
-  const optsHtml=q.opts.map((o,i)=>`
-    <div class="opt${s.ans[s.cur]===i?' sel':''}" onclick="pick(${i})" id="op${i}">
-      <div class="opt-letter">${L[i]}</div>
-      <div class="opt-text">${o}</div>
-    </div>`).join('');
-
-  document.getElementById('q-card').innerHTML=`
-    <div class="q-meta">
-      <span class="q-num">Question ${s.cur+1} of 50</span>
-      <span class="q-dom">${q.dom}</span>
-      <button class="q-flg-btn${s.flg[s.cur]?' on':''}" onclick="toggleFlag()" id="fb">
-        ${s.flg[s.cur]?'🚩 Flagged':'⚑ Flag for Review'}
-      </button>
-    </div>
-    <div class="q-text">${q.txt}</div>
-    <div class="opts" id="opts">${optsHtml}</div>
-    <div class="exp-box" id="expbox"></div>`;
-
-  document.getElementById('prev-btn').disabled=s.cur===0;
-  document.getElementById('next-btn').disabled=s.cur===49;
-  document.getElementById('next-btn').textContent=s.cur===49?'Finish →':'Next →';
-  document.getElementById('nav-info').textContent=`${s.cur+1} of 50`;
-}
-
-function pick(i){
-  if(s.done)return;
-  s.ans[s.cur]=i;
-  render();
-}
-
-function toggleFlag(){
-  s.flg[s.cur]=!s.flg[s.cur];
-  render();
-}
-
-function nav(d){
-  const n=s.cur+d;
-  if(n>=0&&n<50){s.cur=n;render();}
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// SUBMIT
-// ═══════════════════════════════════════════════════════════════════
-function confirmSubmit(){
-  const ac=s.ans.filter(a=>a!==null).length;
-  const msg=`Submit exam?\n\n✅ Answered: ${ac}/50\n⚠️ Unanswered: ${50-ac}\n🚩 Flagged: ${s.flg.filter(Boolean).length}`;
-  if(confirm(msg)) submit();
-}
-
-function submit(){
-  clearInterval(s.timer);
-  s.done=true;s.tEnd=new Date();
-  document.getElementById('exam-screen').style.display='none';
-  document.getElementById('timer-box').style.display='none';
-  document.getElementById('results-screen').style.display='block';
-  buildResults();
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// RESULTS
-// ═══════════════════════════════════════════════════════════════════
-function buildResults(){
-  const corr=Q.filter((q,i)=>s.ans[i]===q.ans).length;
-  const incorr=Q.filter((q,i)=>s.ans[i]!==null&&s.ans[i]!==q.ans).length;
-  const skip=s.ans.filter(a=>a===null).length;
-  const score=Math.round(corr/50*1000);
-  const pct=Math.round(corr/50*100);
-  const pass=score>=700;
-  const ms=s.tEnd-s.t0;
-  const tm=Math.floor(ms/60000),ts=Math.floor((ms%60000)/1000);
-
-  const doms=[...new Set(Q.map(q=>q.dom))];
-  const dpHtml=doms.map(d=>{
-    const dqs=Q.filter(q=>q.dom===d);
-    const dc=dqs.filter(q=>s.ans[q.id-1]===q.ans).length;
-    const dp=Math.round(dc/dqs.length*100);
-    const col=dp>=70?'#107C10':dp>=50?'#FF8C00':'#D13438';
-    return `<div class="dom-perf">
-      <div class="dp-hdr"><span>${d}</span>
-        <span style="font-weight:700;color:${col}">${dc}/${dqs.length} (${dp}%)</span></div>
-      <div class="dp-bar-w"><div class="dp-bar" style="width:${dp}%;background:${col}"></div></div>
-    </div>`;
-  }).join('');
-
-  // Study tips per weak domain
-  const weakDoms=doms.filter(d=>{
-    const dqs=Q.filter(q=>q.dom===d);
-    const dc=dqs.filter(q=>s.ans[q.id-1]===q.ans).length;
-    return dc/dqs.length<0.7;
-  });
-  const tipsMap={
-    'AI Workloads':'Review Microsoft\'s 6 Responsible AI principles and the main AI workload types (classification, regression, clustering, forecasting, anomaly detection, NLP, computer vision, generative AI).',
-    'Machine Learning':'Focus on Azure Machine Learning studio — AutoML, Designer, experiments, pipelines, compute targets, model registration, and the ML lifecycle.',
-    'Computer Vision':'Study Azure AI Vision, Custom Vision, Azure AI Face, and Azure AI Document Intelligence — their features, use cases, and when to use each.',
-    'NLP':'Review Azure AI Language features (NER, sentiment, key phrases, CLU, QnA), Azure AI Speech, Azure AI Translator, and Azure Bot Service.',
-    'Generative AI':'Understand Azure OpenAI Service, LLM concepts (prompts, tokens, hallucinations, grounding), RAG pattern, and Azure AI Content Safety.'
-  };
-  const studyHtml=weakDoms.length===0
-    ?'<p style="font-size:13px;color:#107C10">🎉 Strong performance across all domains! Keep reviewing to stay sharp.</p>'
-    :weakDoms.map(d=>`<div style="margin-bottom:10px"><strong style="font-size:13px">${d}</strong>
-        <p style="font-size:13px;color:var(--dgray);margin-top:4px">${tipsMap[d]||''}</p></div>`).join('');
-
-  document.getElementById('res-card').innerHTML=`
-    <div class="score-wrap">
-      <div class="score-ring ${pass?'pass':'fail'}">
-        <div class="score-pct">${pct}%</div>
-        <div class="score-sub">${score} / 1000</div>
-      </div>
-    </div>
-    <h2 class="res-title" style="color:${pass?'#107C10':'#D13438'}">
-      ${pass?'🎉 PASSED!':'📚 Not Passed Yet'}
-    </h2>
-    <p class="res-sub">${pass
-      ?`You scored ${score}/1000 — above the 700 passing mark. Well done, Danny!`
-      :`You scored ${score}/1000. The passing threshold is 700. Review the weak areas below and try again!`}</p>
-    <div class="stats-grid">
-      <div class="stat-box"><div class="stat-val" style="color:#107C10">${corr}</div><div class="stat-lbl">Correct</div></div>
-      <div class="stat-box"><div class="stat-val" style="color:#D13438">${incorr}</div><div class="stat-lbl">Incorrect</div></div>
-      <div class="stat-box"><div class="stat-val" style="color:#605E5C">${skip}</div><div class="stat-lbl">Skipped</div></div>
-      <div class="stat-box"><div class="stat-val">${tm}m ${ts}s</div><div class="stat-lbl">Time Taken</div></div>
-    </div>
-    <h3 style="font-size:15px;font-weight:700;margin-bottom:16px">Performance by Domain</h3>
-    ${dpHtml}
-    <h3 style="font-size:15px;font-weight:700;margin-top:26px;margin-bottom:14px">📖 Recommended Study Focus</h3>
-    ${studyHtml}
-    <div style="margin-top:22px;padding:16px 20px;background:#F0F7FF;border-radius:10px;border:1px solid #C2DCF7">
-      <p style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px">Official Resources</p>
-      <ul style="font-size:13px;color:var(--dgray);line-height:2;list-style:disc;padding-left:18px">
-        <li>Microsoft Learn — AI-900 Learning Path (learn.microsoft.com/en-us/certifications/exams/ai-900)</li>
-        <li>Azure AI Services documentation (learn.microsoft.com/en-us/azure/ai-services)</li>
-        <li>Responsible AI principles (microsoft.com/en-us/ai/responsible-ai)</li>
-        <li>Azure Machine Learning documentation</li>
-        <li>Azure OpenAI Service documentation</li>
-      </ul>
-    </div>`;
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// REVIEW
-// ═══════════════════════════════════════════════════════════════════
-function showReview(){
-  const rev=document.getElementById('rev-section');
-  rev.style.display='block';
-  rev.scrollIntoView({behavior:'smooth'});
-  const L=['A','B','C','D'];
-  rev.innerHTML='<h3 style="font-size:20px;font-weight:800;margin-bottom:18px">Full Answer Review</h3>'+
-    Q.map((q,i)=>{
-      const ua=s.ans[i],ok=ua===q.ans,sk=ua===null;
-      const bc=ok?'#EAFAEA':sk?'var(--gray)':'#FDEAEA';
-      const bord=ok?'#107C10':sk?'#AAA':'#D13438';
-      const badge=ok?'<span class="rev-badge ok">✓ Correct</span>':sk?'<span class="rev-badge sk">⏭ Skipped</span>':'<span class="rev-badge ng">✗ Incorrect</span>';
-      const opts=q.opts.map((o,j)=>{
-        let cls='opt dis';
-        if(j===q.ans) cls+=' ok';
-        else if(j===ua&&!ok) cls+=' ng';
-        return `<div class="${cls}"><div class="opt-letter">${L[j]}</div>
-          <div class="opt-text">${o}${j===q.ans?' ✓':''}</div></div>`;
-      }).join('');
-      const expHdr=ok?`<div class="exp-hdr ok-hdr">✓ Correct!</div>`
-        :sk?`<div class="exp-hdr" style="color:#605E5C">📌 Explanation (you skipped this)</div>`
-        :`<div class="exp-hdr ng-hdr">✗ Incorrect — Correct answer: ${L[q.ans]}</div>`;
-      return `<div class="rev-card">
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-          <span class="q-num">Q${i+1}</span>
-          <span class="q-dom">${q.dom}</span>
-          ${badge}
-        </div>
-        <div class="q-text" style="font-size:15px;margin-bottom:18px">${q.txt}</div>
-        <div class="opts" style="gap:8px">${opts}</div>
-        <div style="margin-top:16px;padding:14px 18px;border-radius:8px;
-                    border-left:4px solid ${bord};background:${bc}">
-          ${expHdr}
-          <div style="font-size:13px;line-height:1.65;color:var(--text);margin-top:6px">${q.exp}</div>
-        </div>
-      </div>`;
-    }).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// RESTART
-// ═══════════════════════════════════════════════════════════════════
-function restartExam(){
-  clearInterval(s.timer);
-  s={cur:0,ans:new Array(50).fill(null),flg:new Array(50).fill(false),
-     t0:null,tEnd:null,timer:null,left:45*60,done:false};
-  document.getElementById('results-screen').style.display='none';
-  document.getElementById('rev-section').style.display='none';
-  document.getElementById('tmr').textContent='45:00';
-  document.getElementById('tmr').className='timer-val';
-  document.getElementById('start-screen').style.display='block';
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// KEYBOARD SHORTCUTS
-// ═══════════════════════════════════════════════════════════════════
-document.addEventListener('keydown',e=>{
-  if(document.getElementById('exam-screen').style.display==='none') return;
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') nav(1);
-  else if(e.key==='ArrowLeft'||e.key==='ArrowUp') nav(-1);
-  else if(['1','2','3','4'].includes(e.key)) pick(+e.key-1);
-  else if(e.key==='f'||e.key==='F') toggleFlag();
-});
-
-// ═══════════════════════════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════════════════════════
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('on');
-  setTimeout(()=>t.classList.remove('on'),3500);
-}
-</script>
 </body>
 </html>
